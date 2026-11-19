@@ -1,0 +1,7 @@
+bs4
+re
+datetime
+duckdb
+pandas
+matplotlib.pyplot
+seaborn

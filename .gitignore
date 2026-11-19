@@ -1,0 +1,11 @@
+html_dgccrf/*
+!html_dgccrf/.gitkeep
+rapport_bi/*
+!rapport_bi/.gitkeep
+!rapport_bi/rapport-dgccrf.pbix
+table_dgccrf/*
+!table_dgccrf/.gitkeep
+table_naf/naf2008_liste_n2.xls
+table_siret/*
+!table_siret/.gitkeep
+test.py
