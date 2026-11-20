@@ -75,7 +75,7 @@ analyse-dgccrf/
 ├── analyse.ipynb                # Jupyter Notebook contenant l'ensemble du code d'analyse du projet
 ├── scrap.py                     # Script d'extraction des données des pages HTML
 ├── siret_extract.py             # Script d'extraction des données de la table SIRET
-├── dgccrf.pbix                  # Rapport Power BI du projet
+├── rapport-dgccrf.pbix          # Rapport Power BI du projet
 ├── requierment.txt
 ├── .gitignore   
 └── README.md
