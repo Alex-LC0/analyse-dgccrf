@@ -77,11 +77,13 @@ Examples
 >>> rapport = data_clean_dgccrf(df)
 >>> stats = descriptive_analyse(df)
 """
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def data_clean_dgccrf(df : pd.DataFrame) -> dict :
+
+def data_clean_dgccrf(df: pd.DataFrame) -> dict:
     """Génère un rapport de qualité sur le jeu de données des sanctions de la DGCCRF.
 
     La fonction calcule plusieurs indicateurs de qualité : taille du
@@ -148,17 +150,20 @@ def data_clean_dgccrf(df : pd.DataFrame) -> dict :
     131
     """
     quality_report = {
-        "Taille du dataframe" : len(df),
-        "Nombre de doublons : " : df.duplicated().sum(),
-        "Nombre de NaN : " : df.isnull().sum(),
-        "Type de valeur de la colonne SIRET : " : df["Siret"].dtype,
-        "Type de valeur de la colonne Amende :" : df["Amende"].dtype,
-        "Nombre d'amendes hors normes :" : df.loc[df["Amende"] >= 3000000, "Amende"].count(),  #  Valeur jugée hors norme
-        "Type de sanction différentes : " : df["Raison amende"].unique()
+        "Taille du dataframe": len(df),
+        "Nombre de doublons : ": df.duplicated().sum(),
+        "Nombre de NaN : ": df.isnull().sum(),
+        "Type de valeur de la colonne SIRET : ": df["Siret"].dtype,
+        "Type de valeur de la colonne Amende :": df["Amende"].dtype,
+        "Nombre d'amendes hors normes :": df.loc[
+            df["Amende"] >= 3000000, "Amende"
+        ].count(),  #  Valeur jugée hors norme
+        "Type de sanction différentes : ": df["Raison amende"].unique(),
     }
     return quality_report
 
-def data_clean_siret(df : pd.DataFrame) -> dict : 
+
+def data_clean_siret(df: pd.DataFrame) -> dict:
     """Génère un rapport de qualité sur un jeu de données d'établissements identifiés par leur SIRET.
 
     La fonction calcule plusieurs indicateurs de qualité : taille du
@@ -229,21 +234,22 @@ def data_clean_siret(df : pd.DataFrame) -> dict :
     12
     """
     count_siret = 0
-    for vl in df["siret"] : 
-        if len(vl) < 14 :
-            count_siret+=1
+    for vl in df["siret"]:
+        if len(vl) < 14:
+            count_siret += 1
 
     quality_report = {
-        "Taille du dataframe" : len(df),
-        "Nombre de doublons : " : df.duplicated().sum(),
-        "Nombre de NaN : " : df.isnull().sum(),
-        "Type de valeur de la colonne SIRET : " : df["siret"].dtype,
-        "Type de valeur de la colonne code_naf :" : df["code_naf"].dtype,
-        "Nombre de siret mal renseignés" : count_siret
+        "Taille du dataframe": len(df),
+        "Nombre de doublons : ": df.duplicated().sum(),
+        "Nombre de NaN : ": df.isnull().sum(),
+        "Type de valeur de la colonne SIRET : ": df["siret"].dtype,
+        "Type de valeur de la colonne code_naf :": df["code_naf"].dtype,
+        "Nombre de siret mal renseignés": count_siret,
     }
     return quality_report
 
-def data_clean_naf(df : pd.DataFrame) -> dict : 
+
+def data_clean_naf(df: pd.DataFrame) -> dict:
     """Génère un rapport de qualité sur un jeu de données de la nomenclature NAF.
 
     La fonction calcule plusieurs indicateurs de qualité : taille du
@@ -294,14 +300,15 @@ def data_clean_naf(df : pd.DataFrame) -> dict :
     732
     """
     quality_report = {
-        "Taille du dataframe" : len(df),
-        "Nombre de doublons : " : df.duplicated().sum(),
-        "Nombre de NaN : " : df.isnull().sum(),
-        "Type de valeur de la colonne Code : " : df["Code"].dtype
+        "Taille du dataframe": len(df),
+        "Nombre de doublons : ": df.duplicated().sum(),
+        "Nombre de NaN : ": df.isnull().sum(),
+        "Type de valeur de la colonne Code : ": df["Code"].dtype,
     }
     return quality_report
 
-def descriptive_analyse(df : pd.DataFrame) -> dict :
+
+def descriptive_analyse(df: pd.DataFrame) -> dict:
     """Calcule des statistiques descriptives sur les amendes et la couverture des secteurs d'activité.
 
     La fonction calcule, pour la colonne ``Amende``, l'effectif, la
@@ -388,16 +395,16 @@ def descriptive_analyse(df : pd.DataFrame) -> dict :
     >>> stats = descriptive_analyse(df)
     >>> stats["Taille du jeu de donnée : "]
     131
-    """ 
+    """
     descriptive_stats = {
-        "Taille du jeu de donnée : " : len(df),
-        "Nombre total d'amendes sur la période" : df["Amende"].count(),
-        "Tarif moyen d'une amende : " : df["Amende"].mean().round(2),
-        "Tarif médian d'une amende" : df["Amende"].median().round(2),
-        "Ecart type entre les amendes" : df["Amende"].std().round(2),
-        "Tarif minimal d'une amende : " : df["Amende"].min().round(2),
-        "Tarif maximal d'une amende : " : df["Amende"].max().round(2),
-        "Montant total généré par les amendes :" : sum(df["Amende"]),
-        "Nombre de secteur sanctionnés vs. total secteur :" : f"{abs(df["Division"].unique().value_counts().sum() - naf_division["Libellé"].unique().value_counts().sum())} / {naf_division["Libellé"].unique().value_counts().sum()}"
+        "Taille du jeu de donnée : ": len(df),
+        "Nombre total d'amendes sur la période": df["Amende"].count(),
+        "Tarif moyen d'une amende : ": df["Amende"].mean().round(2),
+        "Tarif médian d'une amende": df["Amende"].median().round(2),
+        "Ecart type entre les amendes": df["Amende"].std().round(2),
+        "Tarif minimal d'une amende : ": df["Amende"].min().round(2),
+        "Tarif maximal d'une amende : ": df["Amende"].max().round(2),
+        "Montant total généré par les amendes :": sum(df["Amende"]),
+        "Nombre de secteur sanctionnés vs. total secteur :": f"{abs(df["Division"].unique().value_counts().sum() - naf_division["Libellé"].unique().value_counts().sum())} / {naf_division["Libellé"].unique().value_counts().sum()}",
     }
     return descriptive_stats
